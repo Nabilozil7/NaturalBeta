@@ -1,0 +1,43 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Properti;
+use App\Models\Article; 
+use App\Models\User;
+
+class AdminDashboardController extends Controller
+{
+    public function index()
+    {
+        // Total Properti
+        $properti = Properti::count();
+
+      
+        $statusData = Properti::selectRaw('status, COUNT(*) as total')
+            ->groupBy('status')
+            ->pluck('total', 'status');
+
+        $jenisData = Properti::selectRaw('jenis, COUNT(*) as total')
+            ->groupBy('jenis')
+            ->pluck('total', 'jenis');
+
+        $artikel = Article::count();
+
+        $user = User::count();
+
+        $roleData = User::selectRaw('role, COUNT(*) as total')
+            ->groupBy('role')
+            ->pluck('total', 'role');
+
+        return view('admin.dashboard', compact(
+                        'properti',
+                            'artikel',
+                            'user',
+                            'statusData',
+                            'jenisData',
+                            'roleData',
+    
+        ));
+    }
+}
