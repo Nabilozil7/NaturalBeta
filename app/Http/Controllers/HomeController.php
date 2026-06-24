@@ -48,5 +48,11 @@ public function sendContact(Request $request)
 
     return back()->with('success', 'Pesan berhasil dikirim!');
 }
+public function contact()
+{
+    $profile = CompanyProfile::first();
+
+    return view('contact', compact('profile'));
+}
 
 }

@@ -22,10 +22,9 @@ Route::post('/contact/send', [HomeController::class, 'sendContact'])->name('cont
 Route::get('/artikel', [ArtikelController::class, 'index'])->name('artikel.index');
 Route::get('/artikel/{id}', [ArtikelController::class, 'show'])->name('artikel.show');
 Route::view('/about', 'about');
-Route::view('/contact', 'contact');
+Route::get('/contact', [HomeController::class, 'contact'])
+    ->name('contact');
 
-# ADMIN
-Route::get('/admin', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
 
 Route::prefix('admin')
     ->middleware('auth.manual')
@@ -45,11 +44,6 @@ Route::get('/admin/edit_profil', [UserController::class, 'editprofil'])
 Route::post('/admin/edit_profil', [UserController::class, 'updateProfil'])
     ->name('update_profil');
 
-/*
-|--------------------------------------------------------------------------
-| AUTH (LOGIN MANUAL)
-|--------------------------------------------------------------------------
-*/
 Route::get('/admin/login', [KontrolAuth::class,'showloginform'])
       ->name('admin.login');
 
@@ -58,12 +52,8 @@ Route::post('/admin/login', [KontrolAuth::class,'login'])
 
 Route::post('/admin/logout', [KontrolAuth::class,'logout'])
     ->name('admin.logout');
-/*
-|--------------------------------------------------------------------------
-| ADMIN AREA (WAJIB LOGIN)
-|--------------------------------------------------------------------------
-*/
-Route::prefix('admin')->middleware('auth.manual')->group(function () {
+
+    Route::prefix('admin')->middleware('auth.manual')->group(function () {
 
     Route::get('/admin', [AdminDashboardController::class, 'index'])
     ->name('admin.dashboard');
@@ -75,11 +65,7 @@ Route::prefix('admin')->middleware('auth.manual')->group(function () {
 
 });
 
-/*
-|--------------------------------------------------------------------------
-| ADMIN ONLY (ROLE CHECK)
-|--------------------------------------------------------------------------
-*/
+
 Route::prefix('admin')->middleware(['auth.manual', 'role:admin'])->group(function () {
 
     Route::get('/users', [UserController::class,'index'])->name('users.index');
