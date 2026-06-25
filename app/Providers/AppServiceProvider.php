@@ -24,8 +24,12 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         //View::share('profile', CompanyProfile::first());
+       try {
         if (Schema::hasTable('company_profiles')) {
             View::share('profile', CompanyProfile::first());
         }
+    } catch (\Throwable $e) {
+        // jangan biarkan crash production
+    }
     }
 }
