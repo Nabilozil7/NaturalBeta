@@ -23,13 +23,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //
-        //View::share('profile', CompanyProfile::first());
-       try {
-        if (Schema::hasTable('company_profiles')) {
-            View::share('profile', CompanyProfile::first());
-        }
-    } catch (\Throwable $e) {
-        // jangan biarkan crash production
-    }
+        View::share('profile', CompanyProfile::first());
+       
     }
 }
