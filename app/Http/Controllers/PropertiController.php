@@ -17,7 +17,7 @@ class PropertiController extends Controller
     // tampil detail 1 data
     public function show($id)
     {
-        $properti = properti::findOrFail($id);
+        $properti = Properti::findOrFail($id);
         return view('Project-detail', compact('properti'));
     }
 
