@@ -144,7 +144,7 @@ body::before {
     <div class="card-body p-4">
 
 
-        <form method="POST" action="{{ route('admin.login') }}" id="loginForm">
+        <form method="POST" action="{{ route('login.process') }}" id="loginForm">
             @csrf
 
             <!-- EMAIL -->
