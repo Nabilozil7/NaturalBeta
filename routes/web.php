@@ -55,7 +55,7 @@ Route::post('/admin/logout', [KontrolAuth::class,'logout'])
 
     Route::prefix('admin')->middleware('auth.manual')->group(function () {
 
-    Route::get('/admin', [AdminDashboardController::class, 'index'])
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])
     ->name('admin.dashboard');
 
     Route::resource('projects', Adminprojectcontrol::class);
