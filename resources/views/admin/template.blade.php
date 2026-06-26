@@ -38,10 +38,46 @@
         border: 0;
         border-radius: 10px;
     }
+
 </style>
 
+@media (max-width: 768px) {
 
-    </head>
+    .sidebar{
+        position: relative;
+        width: 100%;
+        min-height: auto;
+        top: 0;
+    }
+
+    .content{
+        margin-left: 0;
+        margin-top: 20px;
+        padding: 15px;
+    }
+
+    .navbar .container{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar-nav{
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .navbar-nav .nav-item{
+        width: 100%;
+    }
+
+    .navbar-nav .dropdown{
+        width: 100%;
+    }
+}
+
+
+
+</head>
 
 
 <body>
@@ -121,7 +157,7 @@
     </div>
 </nav>
 
-<div class="sidebar shadow-sm">
+<div class="sidebar shadow-sm mb-3">
     <h5 class="text-center text-white py-3">ADMIN MENU</h5>
     <a href="{{ route('admin.dashboard') }}">Dashboard</a>
     <a href="{{ route('projects.index') }}">Data Project</a>
