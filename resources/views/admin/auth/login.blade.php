@@ -198,8 +198,8 @@ body::before {
         </form>
 
         <div class="text-center mt-3 footer-text">
-            Login sebagai User : test@example.com / password
-            Login sebagai Admin :admin@gmail.com / admin123456
+            <p>Login sebagai User : test@example.com / password</p>
+            <p>Login sebagai Admin :admin@gmail.com / admin123456</p>
         </div>
         <div class="text-center mt-3">
     <a href="{{ url('/') }}" class="text-decoration-none">
