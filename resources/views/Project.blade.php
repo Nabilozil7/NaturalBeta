@@ -34,7 +34,7 @@
 
     <!-- PAGINATION -->
     <div class="d-flex justify-content-center mt-4">
-        {{ $properti->links('pagination::bootstrap-5') }}
+        {{ $Properti->links('pagination::bootstrap-5') }}
     </div>
 
 </div>
