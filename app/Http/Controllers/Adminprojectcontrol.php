@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Properti;
+use App\Models\properti;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -10,7 +10,7 @@ class Adminprojectcontrol extends Controller
 {
     public function index()
     {
-        $projects = Properti::latest('id')->get();
+        $projects = properti::latest('id')->get();
         return view('admin.projects.index', compact('projects'));
     }
 
@@ -38,7 +38,7 @@ class Adminprojectcontrol extends Controller
             $file->move(public_path('properti'), $imageName);
         }
 
-        Properti::create([
+        properti::create([
             'nama_pemilik' => $request->nama_pemilik,
             'jenis' => $request->jenis,
             'lokasi' => $request->lokasi,
@@ -54,13 +54,13 @@ class Adminprojectcontrol extends Controller
 
     public function edit($id)
     {
-        $project = Properti::findOrFail($id);
+        $project = properti::findOrFail($id);
         return view('admin.projects.edit', compact('project'));
     }
 
     public function update(Request $request, $id)
     {
-        $project = Properti::findOrFail($id);
+        $project = properti::findOrFail($id);
 
         $request->validate([
             'nama_pemilik' => 'required',
