@@ -10,14 +10,14 @@ class PropertiController extends Controller
     //
     public function index()
     {
-        $properti = Properti::query()->paginate(6);
+        $Properti = properti::query()->paginate(6);
         return view('Project', compact('properti'));
     }
 
     // tampil detail 1 data
     public function show($id)
     {
-        $properti = Properti::findOrFail($id);
+        $properti = properti::findOrFail($id);
         return view('Project-detail', compact('properti'));
     }
 
