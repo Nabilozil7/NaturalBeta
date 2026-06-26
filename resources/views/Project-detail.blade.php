@@ -19,21 +19,21 @@
             <div class="card shadow-lg">
 
                 <!-- GAMBAR -->
-                <img src="{{ asset('properti/' . $properti->gambar) }}" 
+                <img src="{{ asset('properti/' . $Properti->gambar) }}" 
                      class="card-img-top">
 
                 <div class="card-body p-4">
 
                     <!-- JUDUL -->
-                    <h3 class="fw-bold mb-3">{{ $properti->jenis }}</h3>
+                    <h3 class="fw-bold mb-3">{{ $Properti->jenis }}</h3>
 
                     <div class="row">
 
                         <!-- KIRI -->
                         <div class="col-md-6">
-                            <p><strong>📍 Lokasi:</strong> {{ $properti->lokasi }}</p>
-                            <p><strong>📐 Luas:</strong> {{ $properti->luas_m2 }} m²</p>
-                            <p><strong>👤 Pemilik:</strong> {{ $properti->nama_pemilik ?? '-' }}</p>
+                            <p><strong>📍 Lokasi:</strong> {{ $Properti->lokasi }}</p>
+                            <p><strong>📐 Luas:</strong> {{ $Properti->luas_m2 }} m²</p>
+                            <p><strong>👤 Pemilik:</strong> {{ $Properti->nama_pemilik ?? '-' }}</p>
                         </div>
 
                         <!-- KANAN -->
@@ -41,18 +41,18 @@
                             <p>
                                 <strong>💰 Harga:</strong><br>
                                 <span class="text-success fs-5">
-                                    Rp {{ number_format($properti->harga) }}
+                                    Rp {{ number_format($Properti->harga) }}
                                 </span>
                             </p>
 
                             <p>
                                 <strong>📦 Status:</strong><br>
-                                @if($properti->status == 'Selesai')
+                                @if($Properti->status == 'Selesai')
                                     <span class="badge bg-success">Selesai</span>
-                                @elseif($properti->status == 'Proses')
+                                @elseif($Properti->status == 'Proses')
                                     <span class="badge bg-warning text-dark">Proses</span>
                                 @else
-                                    <span class="badge bg-secondary">{{ $properti->status }}</span>
+                                    <span class="badge bg-secondary">{{ $Properti->status }}</span>
                                 @endif
                             </p>
                         </div>
