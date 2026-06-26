@@ -1,191 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>@yield('title','Admin web profile')</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>@yield('title','Admin Natural Land')</title>
 
-       <link rel="stylesheet" href="{{ asset('bootstrap-5.3.8-dist/css/bootstrap.min.css') }}">
-        <link rel="stylesheet" href="https://cdn.datatables.net/2.3.8/css/dataTables.dataTables.css">
+<link rel="stylesheet" href="{{ asset('bootstrap-5.3.8-dist/css/bootstrap.min.css') }}">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
 <style>
-    body{background-color: #f8f9fa;}
+body{
+    background:#f8f9fa;
+}
+
+/* SIDEBAR DESKTOP */
+.sidebar{
+    width:240px;
+    min-height:100vh;
+    background:#343a40;
+    position:fixed;
+    top:56px;
+    left:0;
+    padding-top:10px;
+}
+
+.sidebar a{
+    display:block;
+    color:#fff;
+    padding:12px 18px;
+    text-decoration:none;
+    font-size:14px;
+}
+
+.sidebar a:hover{
+    background:#05c344;
+}
+
+/* CONTENT */
+.content{
+    margin-left:240px;
+    margin-top:70px;
+    padding:20px;
+}
+
+/* NAVBAR */
+.navbar-brand{
+    font-weight:700;
+    color:#2b9b09 !important;
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px){
     .sidebar{
-        width: 200px;
-        min-height: 100vh;
-        background-color: #343a40;
-        position: fixed;
-        top: 66px;
-        
-    }
-    .sidebar a{
-        display: block;
-        color: #fff;
-        padding:10px 15px;
-        text-decoration:none;
-    }
-    .sidebar a:hover{
-        background-color: #05c344;
-
-    }
-    .content {
-        margin-top: 70px;
-        margin-left: 250px;
-        padding:20px;
-    }
-    .card {
-        border: 0;
-        border-radius: 10px;
-    }
-
-</style>
-
-@media (max-width: 768px) {
-
-    .sidebar{
-        position: relative;
-        width: 100%;
-        min-height: auto;
-        top: 0;
+        display:none;
     }
 
     .content{
-        margin-left: 0;
-        margin-top: 20px;
-        padding: 15px;
-    }
-
-    .navbar .container{
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .navbar-nav{
-        width: 100%;
-        margin-top: 10px;
-    }
-
-    .navbar-nav .nav-item{
-        width: 100%;
-    }
-
-    .navbar-nav .dropdown{
-        width: 100%;
+        margin-left:0;
+        padding:15px;
     }
 }
-
-
-
+</style>
 </head>
-
 
 <body>
 
 <!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm px-3" style="background-color: #ffffff">
-    <div class="container">
+<nav class="navbar navbar-light bg-white fixed-top shadow-sm">
+    <div class="container-fluid">
 
-        <a href="{{ route('admin.dashboard') }}" class="navbar-brand d-flex align-items-center fw-bold" style="color:#2b9b09">
-            <img src="{{ asset('gambar/logo.png') }}" width="50" height="50" class="me-2">
+        <!-- Hamburger -->
+        <button class="btn d-lg-none" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu">
+            <i class="bi bi-list fs-3"></i>
+        </button>
+
+        <!-- Logo -->
+        <a class="navbar-brand d-flex align-items-center" href="{{ route('admin.dashboard') }}">
+            <img src="{{ asset('gambar/logo.png') }}" width="40" class="me-2">
             NATURAL ADMIN
         </a>
 
-        <ul class="navbar-nav ms-auto d-flex align-items-center">
+        <!-- Right -->
+        <div class="dropdown">
+            @php
+                $user = \App\Models\User::find(session('user_id'));
+            @endphp
 
-            <li class="nav-item">
-                <a href="{{ route('admin.dashboard') }}" class="nav-link fw-semibold">
-                    Dashboard
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('edit_profil') }}" class="dropdown-item fw-semibold">
-                    Profil Saya
-                </a>
-            </li>
-<li class="nav-item dropdown d-flex align-items-center ms-3">
+            <a class="btn dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
+                <img src="{{ $user && $user->photo ? asset('users/'.$user->photo) : asset('gambar/admindefault.png') }}"
+                     width="35" height="35"
+                     class="rounded-circle me-2">
+                {{ session('name') }}
+            </a>
 
-    @php
-    $user = \App\Models\User::find(session('user_id'));
-@endphp
-
-@if($user && $user->photo)
-    <img src="{{ asset('users/'.$user->photo) }}?v={{ time() }}"
-         width="40"
-         height="40"
-         class="rounded-circle me-2 border"
-         style="object-fit:cover;">
-@else
-    <img src="{{ asset('gambar/admindefault.png') }}"
-         width="40"
-         height="40"
-         class="rounded-circle me-2 border"
-         style="object-fit:cover;">
-@endif
-
-    <a class="nav-link dropdown-toggle p-0" href="#" data-bs-toggle="dropdown">
-        {{ session('name') ?? 'Guest' }}
-    </a>
-
-    <ul class="dropdown-menu dropdown-menu-end">
-
-        <li class="dropdown-item-text text-muted">
-            Role: {{ session('role') ?? '-' }}
-
-        </li>
-        <li>
-    <a href="{{ route('edit_profil') }}" class="dropdown-item">
-        Edit Profil
-    </a>
-</li>
-
-        <li><hr class="dropdown-divider"></li>
-
-        <li>
-            <form method="POST" action="{{ route('admin.logout') }}">
-                @csrf
-                <button class="dropdown-item">
-                    Logout
-                </button>
-            </form>
-        </li>
-
-    </ul>
-
-</li>
+            <ul class="dropdown-menu dropdown-menu-end">
+                <li><span class="dropdown-item-text">Role: {{ session('role') }}</span></li>
+                <li><a class="dropdown-item" href="{{ route('edit_profil') }}">Profil</a></li>
+                <li><hr></li>
+                <li>
+                    <form method="POST" action="{{ route('admin.logout') }}">
+                        @csrf
+                        <button class="dropdown-item">Logout</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
 
     </div>
 </nav>
 
-<div class="sidebar shadow-sm mb-3">
-    <h5 class="text-center text-white py-3">ADMIN MENU</h5>
-    <a href="{{ route('admin.dashboard') }}">Dashboard</a>
-    <a href="{{ route('projects.index') }}">Data Project</a>
-    <a href="{{ route('admin.artikel.index') }}">Data Artikel</a>
-    <a href="{{ route('users.index') }}">Data User</a>
-    <a href="{{ route('profile.detail') }}">Profil Perusahaan</a>
-  
+<!-- SIDEBAR DESKTOP -->
+<div class="sidebar d-none d-lg-block">
+    <a href="{{ route('admin.dashboard') }}"><i class="bi bi-speedometer2"></i> Dashboard</a>
+    <a href="{{ route('projects.index') }}"><i class="bi bi-building"></i> Data Project</a>
+    <a href="{{ route('admin.artikel.index') }}"><i class="bi bi-newspaper"></i> Data Artikel</a>
+    <a href="{{ route('users.index') }}"><i class="bi bi-people"></i> Data User</a>
+    <a href="{{ route('profile.detail') }}"><i class="bi bi-bank"></i> Profil Perusahaan</a>
 </div>
 
-
-<div class="content p-3 d-flex flex-column">
-    <div class="flex-grow:1">
-        @yield('content')
+<!-- OFFCANVAS MOBILE -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenu">
+    <div class="offcanvas-header bg-dark text-white">
+        <h5 class="offcanvas-title">Menu Admin</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
     </div>
 
+    <div class="offcanvas-body bg-dark p-0">
+        <a class="d-block text-white p-3" href="{{ route('admin.dashboard') }}">Dashboard</a>
+        <a class="d-block text-white p-3" href="{{ route('projects.index') }}">Project</a>
+        <a class="d-block text-white p-3" href="{{ route('admin.artikel.index') }}">Artikel</a>
+        <a class="d-block text-white p-3" href="{{ route('users.index') }}">User</a>
+        <a class="d-block text-white p-3" href="{{ route('profile.detail') }}">Profil</a>
+    </div>
 </div>
 
+<!-- CONTENT -->
+<div class="content">
+    @yield('content')
+</div>
 
-<footer class="bg-white text-dark text-center border-top py-3 mt-5">
-<p class="mb-0 py-3">&copy; 2026 Natural Land & Property. By Nabil Ibtihal</p>
+<!-- FOOTER -->
+<footer class="text-center py-3 border-top bg-white mt-4">
+    <small>&copy; 2026 Natural Land & Property</small>
 </footer>
-<script src="{{ asset('bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js') }}"></script>
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css">
 
+<script src="{{ asset('bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js') }}"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
-@yield('scripts')
-</body>
-    
 
+@yield('scripts')
+
+</body>
 </html>
