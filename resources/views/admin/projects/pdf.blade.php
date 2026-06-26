@@ -101,7 +101,25 @@
     <table class="kop-table">
         <tr>
             <td style="width: 15%;">
-                <img src="{{ url('gambar/logo.png') }}" class="logo">
+                @php
+                    $imagePath = public_path('properti/'.$project->gambar);
+
+                    $imageBase64 = null;
+
+                    if ($project->gambar && file_exists($imagePath)) {
+                        $type = pathinfo($imagePath, PATHINFO_EXTENSION);
+                        $data = file_get_contents($imagePath);
+                        $imageBase64 = 'data:image/'.$type.';base64,'.base64_encode($data);
+                    }
+                @endphp
+
+                <td>
+                    @if($imageBase64)
+                        <img src="{{ $imageBase64 }}" class="img">
+                    @else
+                        <span style="font-size:10px;">No Image</span>
+                    @endif
+                </td>
             </td>
 
 ```
@@ -140,10 +158,22 @@
 
         <!-- GAMBAR (AMAN TANPA GD) -->
         <td>
-            @if($project->gambar)
-                <img src="{{ url('properti/'.$project->gambar) }}" class="img">
+          @php
+                $path = public_path('properti/'.$project->gambar);
+                $type = pathinfo($path, PATHINFO_EXTENSION);
+
+                if (file_exists($path)) {
+                    $data = file_get_contents($path);
+                    $base64 = 'data:image/'.$type.';base64,'.base64_encode($data);
+                } else {
+                    $base64 = null;
+                }
+            @endphp
+
+            @if($base64)
+                <img src="{{ $base64 }}" class="img">
             @else
-                <span style="font-size:10px;">No Image</span>
+                <span>No Image</span>
             @endif
         </td>
 
