@@ -7,7 +7,7 @@
 
     <div class="row g-4">
 
-        @foreach($properti as $item)
+        @foreach($Properti as $item)
         <div class="col-md-4 col-sm-6">
             <div class="card shadow-sm h-100">
 
