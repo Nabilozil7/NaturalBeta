@@ -27,8 +27,11 @@ class DatabaseSeeder extends Seeder
         'email' => 'test@example.com',
         'password' => bcrypt('password')]);
 
-        $this->call(seederproperti::class);
-        $this->call(UserSeeder::class); $this->call([CompanyProfileSeeder::class,]);
+      
+$this->call([ UserSeeder::class,
+CompanyProfileSeeder::class,
+seederproperti::class,
+]);
     }
      
 
