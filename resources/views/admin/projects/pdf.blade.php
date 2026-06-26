@@ -101,7 +101,7 @@
     <table class="kop-table">
         <tr>
             <td style="width: 15%;">
-                <img src="{{ asset('gambar/logo.png') }}" class="logo">
+                <img src="{{ url('gambar/logo.png') }}" class="logo">
             </td>
 
 ```
@@ -141,7 +141,7 @@
         <!-- GAMBAR (AMAN TANPA GD) -->
         <td>
             @if($project->gambar)
-                <img src="{{ asset('properti/'.$project->gambar) }}" class="img">
+                <img src="{{ url('properti/'.$project->gambar) }}" class="img">
             @else
                 <span style="font-size:10px;">No Image</span>
             @endif
