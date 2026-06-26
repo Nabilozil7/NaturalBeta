@@ -10,7 +10,7 @@ class CompanyProfileController extends Controller
             public function detail()
         {
             $profile = CompanyProfile::first();
-            return view('admin.profile.detail_profile', compact('profile'));
+            return view('profile.detail_profile', compact('profile'));
         }
 
         public function edit()
