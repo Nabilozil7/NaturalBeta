@@ -50,8 +50,6 @@ Route::get('/admin/login', [KontrolAuth::class,'showloginform'])
 Route::post('/admin/login', [KontrolAuth::class,'login'])
     ->name('login.process');
 
-Route::post('/admin/logout', [KontrolAuth::class,'logout'])
-    ->name('admin.logout');
 
     Route::prefix('admin')->middleware('auth.manual')->group(function () {
 
@@ -62,7 +60,8 @@ Route::post('/admin/logout', [KontrolAuth::class,'logout'])
 
     Route::get('/projects/pdf', [Adminprojectcontrol::class, 'cetakpdf'])->name('projects.pdf');
     Route::get('/profile',[CompanyProfileController::class,'detail'])->name('profile.detail');
-
+Route::post('/admin/logout', [KontrolAuth::class,'logout'])
+    ->name('admin.logout');
 });
 
 
