@@ -106,7 +106,7 @@
 
                     $imageBase64 = null;
 
-                    if ($project->gambar && file_exists($imagePath)) {
+                    if ($projects->gambar && file_exists($imagePath)) {
                         $type = pathinfo($imagePath, PATHINFO_EXTENSION);
                         $data = file_get_contents($imagePath);
                         $imageBase64 = 'data:image/'.$type.';base64,'.base64_encode($data);
