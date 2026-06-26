@@ -70,37 +70,10 @@
 
 <!-- HEADER -->
 <div class="kop">
-    <table style="width:100%; border:none;">
-        <tr>
-
-            <!-- LOGO -->
-            <td style="width:15%; text-align:left;">
-                @php
-                    $logoPath = public_path('gambar/logo.png');
-                    $logoBase64 = null;
-
-                    if (file_exists($logoPath)) {
-                        $type = pathinfo($logoPath, PATHINFO_EXTENSION);
-                        $data = file_get_contents($logoPath);
-                        $logoBase64 = 'data:image/'.$type.';base64,'.base64_encode($data);
-                    }
-                @endphp
-
-                @if($logoBase64)
-                    <img src="{{ $logoBase64 }}" style="width:70px;height:70px;">
-                @endif
-            </td>
-
-            <!-- JUDUL -->
-            <td style="width:85%; text-align:center;">
-                <div class="judul">LAPORAN DATA PROPERTI</div>
-                <div class="subjudul">
-                    NATURAL LAND PROPERTY - Sistem Informasi Manajemen Properti
-                </div>
-            </td>
-
-        </tr>
-    </table>
+    <div class="judul">LAPORAN DATA PROPERTI</div>
+    <div class="subjudul">
+        NATURAL LAND PROPERTY - Sistem Informasi Manajemen Properti
+    </div>
 </div>
 
 <!-- TABLE -->
