@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Properti;
+use App\Models\properti;
 use App\Models\Article; 
 use App\Models\User;
 
@@ -11,10 +11,10 @@ class AdminDashboardController extends Controller
     public function index()
     {
         // Total Properti
-        $properti = Properti::count();
+        $properti = properti::count();
 
       
-        $statusData = Properti::selectRaw('status, COUNT(*) as total')
+        $statusData = properti::selectRaw('status, COUNT(*) as total')
             ->groupBy('status')
             ->pluck('total', 'status');
 
