@@ -18,7 +18,7 @@ class AdminDashboardController extends Controller
             ->groupBy('status')
             ->pluck('total', 'status');
 
-        $jenisData = Properti::selectRaw('jenis, COUNT(*) as total')
+        $jenisData = properti::selectRaw('jenis, COUNT(*) as total')
             ->groupBy('jenis')
             ->pluck('total', 'jenis');
 
