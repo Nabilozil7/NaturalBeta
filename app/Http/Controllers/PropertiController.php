@@ -11,7 +11,7 @@ class PropertiController extends Controller
     public function index()
     {
         $Properti = properti::query()->paginate(6);
-        return view('Project', compact('properti'));
+        return view('Project', compact('Properti'));
     }
 
     // tampil detail 1 data
