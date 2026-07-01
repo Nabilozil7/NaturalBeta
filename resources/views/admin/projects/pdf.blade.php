@@ -70,10 +70,32 @@
 
 <!-- HEADER -->
 <div class="kop">
-    <div class="judul">LAPORAN DATA PROPERTI</div>
-    <div class="subjudul">
-        NATURAL LAND PROPERTY - Sistem Informasi Manajemen Properti
-    </div>
+    <table width="100%">
+        <tr>
+            <td width="80">
+                @php
+                    $path = public_path('asset/gambar/logo/akk.png');
+                    $base64 = null;
+
+                    if (file_exists($path)) {
+                        $type = pathinfo($path, PATHINFO_EXTENSION);
+                        $data = file_get_contents($path);
+                        $base64 = 'data:image/'.$type.';base64,'.base64_encode($data);
+                    }
+                @endphp
+
+                @if($base64)
+                    <img src="{{ $base64 }}" width="70">
+                @endif
+            </td>
+
+            <td style="text-align:center;">
+                <h2 style="margin:0; color:#198754;">AKEKA</h2>
+                <p style="margin:3px 0;">LAPORAN DATA PRODUK</p>
+                <small>Sistem Pengadaan Alat Kebersihan Kantor</small>
+            </td>
+        </tr>
+    </table>
 </div>
 
 <!-- TABLE -->
